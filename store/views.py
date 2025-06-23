@@ -33,3 +33,16 @@ def store(request, category_slug=None):
     }
 
     return render(request, 'store/store.html', context)
+
+def product_detail(request, category_slug, product_slug):
+    """
+    Render the product detail page for a specific product.
+    The product is identified by its category slug and product slug.
+    """
+    single_product = get_object_or_404(Product, category__slug=category_slug, slug=product_slug, is_available=True)
+
+    context = {
+        'single_product': single_product,
+    }
+
+    return render(request, 'store/product_detail.html', context)
